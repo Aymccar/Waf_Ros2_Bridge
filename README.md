@@ -1,5 +1,5 @@
 # BUILD
-Run colcon_ws:
+Run in ```colcon_ws```:
 ```bash
 colcon build
 ``` 
