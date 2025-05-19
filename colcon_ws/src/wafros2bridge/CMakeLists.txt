@@ -8,18 +8,21 @@ endif()
 # Find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(rclcpp_components REQUIRED)
 find_package(std_msgs REQUIRED)
 
 include_directories(include)
 
 # Add your shared library
 add_library(${PROJECT_NAME} SHARED
+    src/bridge_server.cpp
     src/bridge_publisher_string.cpp
     src/bridge_node.cpp
 )
 
 ament_target_dependencies(${PROJECT_NAME}
   rclcpp
+  rclcpp_components
   std_msgs
 )
 

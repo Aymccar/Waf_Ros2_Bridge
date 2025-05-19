@@ -1,16 +1,18 @@
-#pragma once 
-#include "bridge_node.hpp"
+#pragma once
 #include "bridge_publisher.hpp"
 
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/string.hpp>
 #include <string>
 
+using Publisher_string_t = rclcpp::Publisher<std_msgs::msg::String>::SharedPtr;
+
 class BridgePublisherString : public BridgePublisher{
 public:
-    BridgePublisherString(std::string name, int buff, BridgeNode node);
+    BridgePublisherString(Publisher_string_t publisher);
+    //TODO IMPLEMENT A DESTRUCTOR
     void publish(std::string msg);
 
 private:
-    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher;
+    Publisher_string_t publisher_;
 };
