@@ -17,6 +17,7 @@ include_directories(include)
 add_library(${PROJECT_NAME} SHARED
     src/bridge_server.cpp
     src/bridge_publisher_string.cpp
+    src/bridge_publisher_array.cpp
     src/bridge_node.cpp
 )
 
