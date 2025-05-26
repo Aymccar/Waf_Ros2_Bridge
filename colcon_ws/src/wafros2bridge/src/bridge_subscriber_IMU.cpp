@@ -4,7 +4,7 @@
 
 #include <functional>
 
-BridgeSubscriberIMU::BridgeSubscriberIMU(std::function<void(user_msg_t)> callback):
+BridgeSubscriberIMU::BridgeSubscriberIMU(std::function<void(IMU_msg_t)> callback):
     BridgeSubscriber()
 {
     user_callback = callback;

@@ -8,7 +8,7 @@
 #include <sensor_msgs/msg/imu.hpp>
 
 using Subscriber_IMU_t = rclcpp::Subscription<sensor_msgs::msg::Imu>::SharedPtr;
-struct user_msg_t {
+struct IMU_msg_t {
     float accel_x;
     float accel_y;
     float accel_z;
@@ -20,17 +20,17 @@ struct user_msg_t {
 
 class BridgeSubscriberIMU : public BridgeSubscriber {
 public:
-    BridgeSubscriberIMU(std::function<void(user_msg_t)> callback);
+    BridgeSubscriberIMU(std::function<void(IMU_msg_t)> callback);
     //TODO Destructor
 
     void set_subscriber(Subscriber_IMU_t subscriber){subscriber_ = subscriber;};
 
     void callback(sensor_msgs::msg::Imu::SharedPtr msg);
-    user_msg_t get() const {return data;};
+    IMU_msg_t get() const {return data;};
 
 private:
     Subscriber_IMU_t subscriber_;
 
-    user_msg_t data;
-    std::function<void(user_msg_t)> user_callback;
+    IMU_msg_t data;
+    std::function<void(IMU_msg_t)> user_callback;
 };

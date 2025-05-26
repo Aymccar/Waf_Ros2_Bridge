@@ -34,7 +34,7 @@ BridgePublisherArray* BridgeNode::create_publisher_array(std::string name, int i
        return new BridgePublisherArray(publisher);
 }
 
-BridgeSubscriberArray* BridgeNode::create_subscriber_array(std::string name, int i, std::function<void(std::vector<int>)> callback){
+BridgeSubscriberArray* BridgeNode::create_subscriber_array(std::string name, int i, std::function<void(array_msg_t)> callback){
 
     auto* bridge_sub = new BridgeSubscriberArray(callback);
 
@@ -43,7 +43,7 @@ BridgeSubscriberArray* BridgeNode::create_subscriber_array(std::string name, int
     return bridge_sub;
 }
 
-BridgeSubscriberIMU* BridgeNode::create_subscriber_IMU(std::string name, int i, std::function<void(user_msg_t)> callback){
+BridgeSubscriberIMU* BridgeNode::create_subscriber_IMU(std::string name, int i, std::function<void(IMU_msg_t)> callback){
 
     auto* bridge_sub = new BridgeSubscriberIMU(callback);
 

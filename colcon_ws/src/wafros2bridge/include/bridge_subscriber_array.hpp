@@ -8,20 +8,23 @@
 #include <std_msgs/msg/int32_multi_array.hpp>
 
 using Subscriber_int_array_t = rclcpp::Subscription<std_msgs::msg::Int32MultiArray>::SharedPtr;
+struct array_msg_t {
+    std::vector<int> data;
+};
 
 class BridgeSubscriberArray : public BridgeSubscriber {
 public:
-    BridgeSubscriberArray(std::function<void(std::vector<int>)> callback);
+    BridgeSubscriberArray(std::function<void(array_msg_t)> callback);
     //TODO Destructor
 
     void set_subscriber(Subscriber_int_array_t subscriber){subscriber_ = subscriber;};
 
     void callback(std_msgs::msg::Int32MultiArray::SharedPtr msg);
-    std::vector<int> get() const {return data;};
+    array_msg_t get() const {return data;};
 
 private:
     Subscriber_int_array_t subscriber_;
 
-    std::vector<int> data;
-    std::function<void(std::vector<int>)> user_callback;
+    array_msg_t data;
+    std::function<void(array_msg_t)> user_callback;
 };

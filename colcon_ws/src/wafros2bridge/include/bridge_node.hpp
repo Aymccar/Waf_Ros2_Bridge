@@ -23,8 +23,8 @@ public :
 
     //Subscriber
     //TODO Templatization
-    BridgeSubscriberArray* create_subscriber_array(std::string name, int i, std::function<void(std::vector<int>)> callback);
-    BridgeSubscriberIMU* create_subscriber_IMU(std::string name, int i, std::function<void(user_msg_t)> callback);
+    BridgeSubscriberArray* create_subscriber_array(std::string name, int i, std::function<void(array_msg_t)> callback);
+    BridgeSubscriberIMU* create_subscriber_IMU(std::string name, int i, std::function<void(IMU_msg_t)> callback);
 
     //Spin
     void spin();

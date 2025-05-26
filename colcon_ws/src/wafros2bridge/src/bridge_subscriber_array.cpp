@@ -4,13 +4,13 @@
 
 #include <functional>
 
-BridgeSubscriberArray::BridgeSubscriberArray(std::function<void(std::vector<int>)> callback):
+BridgeSubscriberArray::BridgeSubscriberArray(std::function<void(array_msg_t)> callback):
     BridgeSubscriber()
 {
     user_callback = callback;
 }
 
 void BridgeSubscriberArray::callback(std_msgs::msg::Int32MultiArray::SharedPtr msg){
-    data = std::vector(msg->data);
+    data.data = std::vector(msg->data);
     user_callback(data);
 }
