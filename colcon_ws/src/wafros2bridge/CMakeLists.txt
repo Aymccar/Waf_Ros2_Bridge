@@ -10,6 +10,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
 
 include_directories(include)
 
@@ -18,6 +19,8 @@ add_library(${PROJECT_NAME} SHARED
     src/bridge_server.cpp
     src/bridge_publisher_string.cpp
     src/bridge_publisher_array.cpp
+    src/bridge_subscriber_array.cpp
+    src/bridge_subscriber_IMU.cpp
     src/bridge_node.cpp
 )
 
@@ -25,6 +28,7 @@ ament_target_dependencies(${PROJECT_NAME}
   rclcpp
   rclcpp_components
   std_msgs
+  sensor_msgs
 )
 
 ament_export_targets(${PROJECT_NAME} HAS_LIBRARY_TARGET)
