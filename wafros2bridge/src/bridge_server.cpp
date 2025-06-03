@@ -3,5 +3,7 @@
 void BridgeServer::init(){
     int argc = 0;
     char** argv = nullptr;
-    rclcpp::init(argc, argv);
+    if (!rclcpp::ok()){
+        rclcpp::init(argc, argv);
+    }
 }

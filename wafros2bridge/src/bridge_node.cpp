@@ -10,9 +10,11 @@
 
 using std::placeholders::_1;
 
-BridgeNode::BridgeNode(std::string name){
-    node = std::make_shared<rclcpp::Node>(name);
+BridgeNode::BridgeNode(std::string name, std::string namespace_){
+    node = std::make_shared<rclcpp::Node>(name, namespace_);
 }
+
+BridgeNode::BridgeNode(std::string name): BridgeNode(name, ""){}
 
 void BridgeNode::spin(){
     rclcpp::spin(node);
@@ -34,11 +36,20 @@ BridgePublisherArray* BridgeNode::create_publisher_array(std::string name, int i
        return new BridgePublisherArray(publisher);
 }
 
-BridgeSubscriberArray* BridgeNode::create_subscriber_array(std::string name, int i, std::function<void(array_msg_t)> callback){
+BridgeSubscriberArrayInt* BridgeNode::create_subscriber_array(std::string name, int i, std::function<void(array_int_msg_t)> callback){
 
-    auto* bridge_sub = new BridgeSubscriberArray(callback);
+    auto* bridge_sub = new BridgeSubscriberArrayInt(callback);
 
-    auto subscriber = node->create_subscription<std_msgs::msg::Int32MultiArray>(name, i, std::bind(&BridgeSubscriberArray::callback, bridge_sub, _1));
+    auto subscriber = node->create_subscription<std_msgs::msg::Int32MultiArray>(name, i, std::bind(&BridgeSubscriberArrayInt::callback, bridge_sub, _1));
+    bridge_sub->set_subscriber(subscriber);
+    return bridge_sub;
+}
+
+BridgeSubscriberArrayFloat* BridgeNode::create_subscriber_array(std::string name, int i, std::function<void(array_float_msg_t)> callback){
+
+    auto* bridge_sub = new BridgeSubscriberArrayFloat(callback);
+
+    auto subscriber = node->create_subscription<std_msgs::msg::Float32MultiArray>(name, i, std::bind(&BridgeSubscriberArrayFloat::callback, bridge_sub, _1));
     bridge_sub->set_subscriber(subscriber);
     return bridge_sub;
 }
